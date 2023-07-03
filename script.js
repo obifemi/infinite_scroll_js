@@ -6,19 +6,33 @@ const imageContainer = document.getElementById('image-container')
 const loader = document.getElementById('loader')
 let photosArray = []
 
-
+const setAttributesAuto = (element, attributes)=>{
+    for (const key in attributes){
+        element.setAttribute(key, attributes[key])
+    }
+    
+}
 
 const displayPhotos = () =>{
     photosArray.forEach((photo) =>{
         //create <a> to link to unsplash
         const item = document.createElement('a')
-        item.setAttribute('href', photo.links.html) 
-        item.setAttribute('target', '_blank')
+        setAttributesAuto(item, {
+            href:photo.links.html,
+            target:'_blank'
+        })
+        // item.setAttribute('href', photo.links.html) 
+        // item.setAttribute('target', '_blank')
         //create <img> for photo
         const img = document.createElement('img')
-        img.setAttribute('src', photo.urls.regular)
-        img.setAttribute('alt', photo.alt_description)
-        img.setAttribute('title', photo.alt_description)
+        setAttributesAuto(img, {
+            src:photo.urls.regular,
+            alt:photo.alt_description,
+            title:photo.alt_description
+        })
+        // img.setAttribute('src', photo.urls.regular)
+        // img.setAttribute('alt', photo.alt_description)
+        // img.setAttribute('title', photo.alt_description)
         //put <img> inside <a>, then put both inside imageContainer
         item.appendChild(img)
         imageContainer.appendChild(item)
